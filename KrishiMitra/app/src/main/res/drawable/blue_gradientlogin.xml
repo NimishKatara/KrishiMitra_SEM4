@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Background Gradient -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="270"
+                android:startColor="#2253C1"
+                android:centerColor="#073878"
+                android:endColor="#03346C" />
+            <corners android:topLeftRadius="32dp" android:topRightRadius="32dp"/>
+        </shape>
+    </item>
+
+</layer-list>

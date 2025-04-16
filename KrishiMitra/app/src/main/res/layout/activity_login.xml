@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity"
+    android:background="@drawable/backgroundimg">
+
+    <TextView
+        android:id="@+id/Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="31dp"
+        android:layout_marginStart="20dp"
+        android:text="@string/title"
+        android:textColor="@android:color/white"
+        android:textSize="31sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <com.example.krishimitra.GradientTextView
+        android:id="@+id/KrishiMitra"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/krishimitratitle"
+        android:textSize="35sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/Title"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"/>
+    <TextView
+        android:id="@+id/LoginDesc"
+        android:layout_width="277dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/KrishiMitra"
+        android:text="@string/logindesc"
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="20dp"
+        />
+
+    <View
+        android:id="@+id/blueGradientBox"
+        android:layout_width="match_parent"
+        android:layout_height="340dp"
+        android:background="@drawable/blue_gradientlogin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/LoginText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/blueGradientBox"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="30dp"
+        android:textSize="36sp"
+        android:textColor="#FFFFFF"
+        android:text="@string/login"
+        />
+
+    <TextView
+        android:id="@+id/TermsAndConditions"
+        android:layout_width="277dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@+id/blueGradientBox"
+        app:layout_constraintTop_toBottomOf="@+id/LoginText"
+        android:layout_marginStart="44dp"
+        android:text="@string/termsandconditions"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"/>
+
+    <ImageView
+        android:contentDescription="@null"
+        android:id="@+id/FatFarmer"
+        android:layout_width="173dp"
+        android:layout_height="212dp"
+        android:background="@drawable/fatfarmer"
+        android:layout_marginBottom="320dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/blueGradientBox" />
+
+    <EditText
+        android:id="@+id/phoneNumberInput"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="84dp"
+        android:layout_marginEnd="44dp"
+        android:background="@drawable/input_field_background"
+        android:hint="@string/enternumberhint"
+        android:inputType="phone"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#B0BEC5"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/TermsAndConditions" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

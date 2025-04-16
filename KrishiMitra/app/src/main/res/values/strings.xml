@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">KrishiMitra</string>
+    <string name="title">Getting started with</string>
+    <string name="krishimitratitle">KrishiMitra</string>
+    <string name="logindesc">Your Smart Farming Companion for Better Yields and Sustainable Growth</string>
+    <string name="login">Login</string>
+    <string name="termsandconditions">By continuing, you agree the our User Agreement and acknowledge that you understand the Privacy Policy</string>
+    <string name="enternumberhint">Enter your phone number</string>
+    <string name="otpdeclaration">OTP Verification</string>
+    <string name="otpdescription">We will send you a one time password on this Mobile Number</string>
+</resources>
