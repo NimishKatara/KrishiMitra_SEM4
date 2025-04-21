@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    android:background="@drawable/backgroundimg"
+    tools:context=".CropRegistration">
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/registrationTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Farm Details"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- Subtitle -->
+    <TextView
+        android:id="@+id/registrationDesc"
+        android:layout_width="309dp"
+        android:layout_height="wrap_content"
+        android:text="Provide Your Farm Details for Expert Guidance"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/registrationTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="4dp" />
+    <TextView
+        android:layout_marginTop="30dp"
+        android:id="@+id/cropText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Crop Info"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/selectCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/registrationDesc" />
+    <EditText
+        android:layout_marginTop="5dp"
+        android:id="@+id/selectCrop"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:hint="Select Crop"
+        android:background="@drawable/edit_text_bg"
+        android:padding="10dp"
+
+        android:textColor="#FFFFFF"
+        android:textColorHint="#CCCCCC"
+        app:layout_constraintTop_toBottomOf="@id/cropText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/soilText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Soil Info"
+        app:layout_constraintBottom_toTopOf="@+id/selectSoil"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        android:textColor="#FFFFFF"
+        app:layout_constraintTop_toBottomOf="@+id/selectCrop" />
+
+    <EditText
+        android:id="@+id/selectSoil"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:hint="Select Soil"
+        android:background="@drawable/edit_text_bg"
+        android:padding="10dp"
+        android:layout_marginTop="5dp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#CCCCCC"
+        app:layout_constraintTop_toBottomOf="@id/soilText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/sizeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Farm Size (m2)"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/farmSize"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/selectSoil" />
+    <EditText
+        android:id="@+id/farmSize"
+
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:hint="Farm Size (m²)"
+        android:background="@drawable/edit_text_bg"
+        android:padding="10dp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#CCCCCC"
+        android:inputType="number"
+        android:text="200"
+        app:layout_constraintTop_toBottomOf="@id/sizeText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="5dp" />
+
+    <TextView
+        android:id="@+id/fallowPeriodLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Fallow Period (months)"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/farmSize" />
+
+    <EditText
+        android:id="@+id/fallowInfo"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:hint="Farm Size (m²)"
+        android:background="@drawable/edit_text_bg"
+        android:padding="10dp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#CCCCCC"
+        android:inputType="number"
+        android:text="16 months"
+        app:layout_constraintTop_toBottomOf="@id/fallowPeriodLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="5dp" />
+
+
+
+
+    <Button
+        android:id="@+id/submitBtn"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="44dp"
+        android:backgroundTint="#007BFF"
+        android:text="Submit"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fallowInfo" />
+
+<!--    <ImageView-->
+<!--        android:id="@+id/settingsIcon"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:src="@drawable/ic_settings"-->
+<!--        android:contentDescription="Settings"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        android:layout_marginBottom="16dp" />-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>

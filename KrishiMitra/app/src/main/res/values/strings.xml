@@ -8,4 +8,7 @@
     <string name="enternumberhint">Enter your phone number</string>
     <string name="otpdeclaration">OTP Verification</string>
     <string name="otpdescription">We will send you a one time password on this Mobile Number</string>
+    <string name="landingDesc">Smart Recommendations for Healthier Crops and Better Yields!</string>
+    <string name="registrationDesc">Provide Your Farm Details for Expert Guidance</string>
+    <string name="farmdetails">Farm Details</string>
 </resources>

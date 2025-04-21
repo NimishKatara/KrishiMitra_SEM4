@@ -1,0 +1,62 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/backgroundimg"
+    android:padding="16dp">
+
+    <com.example.krishimitra.GradientTextView
+        android:id="@+id/KrishiMitra"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/krishimitratitle"
+        android:textSize="35sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/desc"
+        android:layout_width="277dp"
+        android:textAlignment="center"
+        android:layout_height="wrap_content"
+        android:text="@string/landingDesc"
+        android:layout_marginTop="10dp"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/KrishiMitra" />
+    <Button
+        android:id="@+id/addCrop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+ Add Crop"
+        app:layout_constraintTop_toBottomOf="@id/desc"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="12dp"/>
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="12dp"
+        android:contentDescription="Registered crops"
+        app:layout_constraintTop_toBottomOf="@id/addCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:id="@+id/crop_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"/>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

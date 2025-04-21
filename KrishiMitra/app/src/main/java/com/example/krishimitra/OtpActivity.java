@@ -1,5 +1,6 @@
 package com.example.krishimitra;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.Editable;
@@ -17,7 +18,7 @@ public class OtpActivity extends AppCompatActivity {
     private EditText[] otpFields;
     private TextView otpTimer;
     private CountDownTimer countDownTimer;
-    private static final long TIMER_DURATION = 5 * 60 * 1000; // 5 minutes in milliseconds
+    private static final long TIMER_DURATION = 5 * 60 * 1000; // 5 minutes
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +43,20 @@ public class OtpActivity extends AppCompatActivity {
         otpTimer = findViewById(R.id.otpTimer);
         startOtpCountdown();
 
+        // Setup input behavior
         setupOtpInputs();
+
+        // Set up Submit button click listener
+        Button submitButton = findViewById(R.id.SubmitButton);
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Redirect to LandingActivity
+                Intent intent = new Intent(OtpActivity.this, LandingActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     private void setupOtpInputs() {
@@ -56,7 +70,6 @@ public class OtpActivity extends AppCompatActivity {
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
                     if (s.length() == 1 && index < otpFields.length - 1) {
-                        // Move to next OTP box
                         otpFields[index + 1].requestFocus();
                     }
                 }
@@ -70,7 +83,6 @@ public class OtpActivity extends AppCompatActivity {
                 public boolean onKey(View v, int keyCode, KeyEvent event) {
                     if (keyCode == KeyEvent.KEYCODE_DEL && event.getAction() == KeyEvent.ACTION_DOWN) {
                         if (otpFields[index].getText().toString().isEmpty() && index > 0) {
-                            // Move to previous OTP box when backspacing on empty field
                             otpFields[index - 1].requestFocus();
                         }
                     }

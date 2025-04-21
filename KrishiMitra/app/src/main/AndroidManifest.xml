@@ -12,22 +12,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.KrishiMitra"
         tools:targetApi="31">
-
-        <!-- Login Activity (Main Activity) -->
+        <activity
+            android:name=".CropRegistration"
+            android:exported="false" />
+        <activity
+            android:name=".LandingActivity"
+            android:exported="false" /> <!-- Login Activity (Main Activity) -->
         <activity
             android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-        <!-- Otp Activity (Add this) -->
+        </activity> <!-- Otp Activity (Add this) -->
         <activity
             android:name=".OtpActivity"
-            android:exported="false"/> <!-- false because it's not a launcher activity -->
-
+            android:exported="false" />
     </application>
 
 </manifest>
