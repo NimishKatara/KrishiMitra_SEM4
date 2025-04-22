@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,15 +27,19 @@ public class CropRegistration extends AppCompatActivity {
             return insets;
         });
 
-        // Handle Submit button click
+        // Submit button click -> Go to LandingActivity
         Button submitBtn = findViewById(R.id.submitBtn);
-        submitBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(CropRegistration.this, LandingActivity.class);
-                startActivity(intent);
-                finish(); // optional: closes current activity
-            }
+        submitBtn.setOnClickListener(view -> {
+            Intent intent = new Intent(CropRegistration.this, LandingActivity.class);
+            startActivity(intent);
+            finish();
+        });
+
+        // Settings image button click -> Go to SettingsActivity
+        ImageView settingsButton = findViewById(R.id.settingsButton);
+        settingsButton.setOnClickListener(view -> {
+            Intent intent = new Intent(CropRegistration.this, Settings.class);
+            startActivity(intent);
         });
     }
 }
