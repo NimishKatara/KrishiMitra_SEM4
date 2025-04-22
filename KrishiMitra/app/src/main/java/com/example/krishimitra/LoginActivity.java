@@ -3,7 +3,9 @@ package com.example.krishimitra;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
 import android.widget.EditText;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -40,6 +42,14 @@ public class LoginActivity extends AppCompatActivity {
                 return true;
             }
             return false;
+        });
+        Button addCropButton = findViewById(R.id.submitNumber);
+        addCropButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, OtpActivity.class);
+                startActivity(intent);
+            }
         });
     }
 }
