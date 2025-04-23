@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,6 +24,11 @@ public class LandingActivity extends AppCompatActivity {
                 Intent intent = new Intent(LandingActivity.this, CropRegistration.class);
                 startActivity(intent);
             }
+        });
+        ImageView settingsButton = findViewById(R.id.settingsButton);
+        settingsButton.setOnClickListener(view -> {
+            Intent intent = new Intent(LandingActivity.this, Settings.class);
+            startActivity(intent);
         });
     }
 }

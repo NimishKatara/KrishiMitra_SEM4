@@ -108,6 +108,7 @@
         app:layout_constraintTop_toBottomOf="@id/TermsAndConditions" />
 
     <Button
+        android:background="@drawable/input_field_background"
         android:id="@+id/submitNumber"
         android:layout_marginTop="30dp"
         android:layout_width="wrap_content"

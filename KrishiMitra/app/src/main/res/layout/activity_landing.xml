@@ -48,6 +48,7 @@
         android:contentDescription="Registered crops"
         app:layout_constraintTop_toBottomOf="@id/addCrop"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/settingsButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
@@ -57,6 +58,18 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"/>
     </ScrollView>
+    <ImageView
+        android:layout_marginTop="30dp"
+        android:id="@+id/settingsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icon_settings"
+        android:contentDescription="Settings"
+        app:layout_constraintTop_toBottomOf="@id/scrollView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="16dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

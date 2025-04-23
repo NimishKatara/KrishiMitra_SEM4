@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:background="@drawable/backgroundimg"
+    android:layout_height="match_parent"
+    tools:context=".Feedback">
+
+    <TextView
+        android:id="@+id/feedbackTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Feedback"
+        android:textColor="#FFFFFF"
+        android:textSize="31sp"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/feedbackDesc"
+        android:layout_width="277dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:text="Share Your Feedback to Help Us Improve KrishiMitra"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/feedbackTitle" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="90dp"
+        android:text="How are you finding KrishiMitra?"
+        android:textColor="#FFFFFF"
+        android:textSize="22.5sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/feedbackDesc" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="245dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="We’ve been working hard to develop our application, so your feedback is important to us."
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="17.96sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <RatingBar
+        android:layout_marginTop="30dp"
+        android:id="@+id/ratingBar"
+        style="?android:attr/ratingBarStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:isIndicator="false"
+        android:numStars="5"
+        android:progressTint="#EAB308"
+        android:rating="0"
+        android:scaleX="3"
+        android:scaleY="2.5"
+        android:stepSize="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="278dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Your feedback matters! Help us enhance KrishiMitra for better farming solutions."
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="17sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
+
+    <EditText
+        android:layout_marginTop="20dp"
+        android:id="@+id/paragraphInput"
+        android:layout_width="278dp"
+        android:layout_height="150dp"
+        android:gravity="top|start"
+        android:hint="How can we improve?"
+        android:textSize="16sp"
+        android:inputType="textMultiLine"
+        android:lines="5"
+        android:background="@drawable/rounded_edittext"
+        android:padding="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
