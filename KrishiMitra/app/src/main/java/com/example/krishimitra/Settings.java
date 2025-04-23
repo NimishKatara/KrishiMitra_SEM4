@@ -25,5 +25,9 @@ public class Settings extends AppCompatActivity {
             Intent intent = new Intent(Settings.this, Feedback.class);
             startActivity(intent);
         });
+        findViewById(R.id.logoutOption).setOnClickListener(v -> {
+            Intent intent = new Intent(Settings.this, LoginActivity.class);
+            startActivity(intent);
+        });
     }
 }
