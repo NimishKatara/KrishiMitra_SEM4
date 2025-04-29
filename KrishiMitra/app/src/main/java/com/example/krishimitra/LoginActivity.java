@@ -35,19 +35,23 @@ public class LoginActivity extends AppCompatActivity {
             if (actionId == EditorInfo.IME_ACTION_DONE ||
                     (event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
 
-                // Navigate to OTP Activity
+                String phoneNumber = phoneNumberInput.getText().toString();
                 Intent intent = new Intent(LoginActivity.this, OtpActivity.class);
-                intent.putExtra("PHONE_NUMBER",phoneNumberInput.getText().toString());
+                intent.putExtra("PHONE_NUMBER", phoneNumber);
                 startActivity(intent);
                 return true;
             }
             return false;
         });
+
+        // Handle Submit button click
         Button addCropButton = findViewById(R.id.submitNumber);
         addCropButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String phoneNumber = phoneNumberInput.getText().toString();
                 Intent intent = new Intent(LoginActivity.this, OtpActivity.class);
+                intent.putExtra("PHONE_NUMBER", phoneNumber);
                 startActivity(intent);
             }
         });
