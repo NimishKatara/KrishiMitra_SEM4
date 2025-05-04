@@ -40,24 +40,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="12dp"/>
 
-    <ScrollView
-        android:id="@+id/scrollView"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/cropRecyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:clipToPadding="false"
         android:layout_marginTop="12dp"
-        android:contentDescription="Registered crops"
         app:layout_constraintTop_toBottomOf="@id/addCrop"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintBottom_toTopOf="@id/settingsButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <LinearLayout
-            android:id="@+id/crop_container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"/>
-    </ScrollView>
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:listitem="@layout/crop_card" />
     <ImageView
         android:layout_marginTop="30dp"
         android:id="@+id/settingsButton"
@@ -65,7 +58,7 @@
         android:layout_height="wrap_content"
         android:src="@drawable/icon_settings"
         android:contentDescription="Settings"
-        app:layout_constraintTop_toBottomOf="@id/scrollView"
+        app:layout_constraintTop_toBottomOf="@id/cropRecyclerView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
