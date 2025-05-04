@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
+    id("com.google.gms.google-services") // Firebase plugin
 }
 
 android {
@@ -32,7 +33,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
@@ -40,4 +40,13 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
+    // Firebase BOM for version management
+    implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
+
+    // Firebase Authentication
+    implementation("com.google.firebase:firebase-auth")
 }
+
+// Apply the Google services plugin at the bottom
+apply(plugin = "com.google.gms.google-services")

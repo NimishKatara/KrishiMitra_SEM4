@@ -97,51 +97,74 @@
             android:gravity="center"
             android:background="@drawable/otp_box_background"
             android:imeOptions="actionNext"
-            android:importantForAccessibility="no"/>
+            android:importantForAccessibility="no" />
 
         <EditText
             android:id="@+id/otp2"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:layout_marginStart="20dp"
             android:inputType="number"
             android:maxLength="1"
             android:textSize="24sp"
             android:gravity="center"
             android:background="@drawable/otp_box_background"
             android:imeOptions="actionNext"
-            android:layout_marginStart="20dp"
-            android:importantForAccessibility="no"
-            />
+            android:importantForAccessibility="no" />
 
         <EditText
             android:id="@+id/otp3"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:layout_marginStart="20dp"
             android:inputType="number"
             android:maxLength="1"
             android:textSize="24sp"
             android:gravity="center"
             android:background="@drawable/otp_box_background"
             android:imeOptions="actionNext"
-            android:layout_marginStart="20dp"
-            android:importantForAccessibility="no"
-            />
+            android:importantForAccessibility="no" />
 
         <EditText
             android:id="@+id/otp4"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:layout_marginStart="20dp"
+            android:inputType="number"
+            android:maxLength="1"
+            android:textSize="24sp"
+            android:gravity="center"
+            android:background="@drawable/otp_box_background"
+            android:imeOptions="actionNext"
+            android:importantForAccessibility="no" />
+
+        <EditText
+            android:id="@+id/otp5"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="20dp"
+            android:inputType="number"
+            android:maxLength="1"
+            android:textSize="24sp"
+            android:gravity="center"
+            android:background="@drawable/otp_box_background"
+            android:imeOptions="actionNext"
+            android:importantForAccessibility="no" />
+
+        <EditText
+            android:id="@+id/otp6"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="20dp"
             android:inputType="number"
             android:maxLength="1"
             android:textSize="24sp"
             android:gravity="center"
             android:background="@drawable/otp_box_background"
             android:imeOptions="actionDone"
-            android:layout_marginStart="20dp"
-            android:importantForAccessibility="no"
-            />
-
+            android:importantForAccessibility="no" />
     </LinearLayout>
+
     <TextView
         android:id="@+id/OTPnotRecieved"
         android:layout_width="wrap_content"

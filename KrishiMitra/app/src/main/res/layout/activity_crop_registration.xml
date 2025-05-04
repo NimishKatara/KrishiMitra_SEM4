@@ -32,6 +32,8 @@
         app:layout_constraintTop_toBottomOf="@id/registrationTitle"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="4dp" />
+
+    <!-- Crop Type Spinner -->
     <TextView
         android:layout_marginTop="30dp"
         android:id="@+id/cropText"
@@ -41,52 +43,47 @@
         android:textStyle="bold"
         android:textColor="#FFFFFF"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/selectCrop"
+        app:layout_constraintBottom_toTopOf="@+id/cropInput"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/registrationDesc" />
-    <EditText
-        android:layout_marginTop="5dp"
-        android:id="@+id/selectCrop"
+    <Spinner
+        android:id="@+id/cropInput"
         android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:hint="Select Crop"
+        android:layout_height="wrap_content"
         android:background="@drawable/edit_text_bg"
-        android:padding="10dp"
-
+        android:padding="48dp"
+        android:layout_marginTop="5dp"
         android:textColor="#FFFFFF"
-        android:textColorHint="#CCCCCC"
         app:layout_constraintTop_toBottomOf="@id/cropText"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        />
+        app:layout_constraintEnd_toEndOf="parent" />
 
+    <!-- Soil Type Spinner -->
     <TextView
         android:id="@+id/soilText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Soil Info"
-        app:layout_constraintBottom_toTopOf="@+id/selectSoil"
+        app:layout_constraintBottom_toTopOf="@+id/soilInput"
         app:layout_constraintStart_toStartOf="parent"
         android:textSize="16sp"
         android:textStyle="bold"
         android:layout_marginTop="20dp"
         android:textColor="#FFFFFF"
-        app:layout_constraintTop_toBottomOf="@+id/selectCrop" />
-
-    <EditText
-        android:id="@+id/selectSoil"
+        app:layout_constraintTop_toBottomOf="@+id/cropInput" />
+    <Spinner
+        android:id="@+id/soilInput"
         android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:hint="Select Soil"
+        android:layout_height="wrap_content"
         android:background="@drawable/edit_text_bg"
-        android:padding="10dp"
+        android:padding="48dp"
         android:layout_marginTop="5dp"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#CCCCCC"
+        android:textAlignment="center"
         app:layout_constraintTop_toBottomOf="@id/soilText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <!-- Farm Size Input -->
     <TextView
         android:id="@+id/sizeText"
         android:layout_width="wrap_content"
@@ -98,10 +95,9 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/farmSize"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/selectSoil" />
+        app:layout_constraintTop_toBottomOf="@+id/soilInput" />
     <EditText
         android:id="@+id/farmSize"
-
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:hint="Farm Size (m²)"
@@ -116,6 +112,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="5dp" />
 
+    <!-- Fallow Period Input -->
     <TextView
         android:id="@+id/fallowPeriodLabel"
         android:layout_width="wrap_content"
@@ -126,7 +123,6 @@
         android:textColor="#FFFFFF"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/farmSize" />
-
     <EditText
         android:id="@+id/fallowInfo"
         android:layout_width="0dp"
@@ -143,9 +139,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="5dp" />
 
-
-
-
+    <!-- Submit Button -->
     <Button
         android:id="@+id/submitBtn"
         android:layout_width="0dp"
@@ -159,6 +153,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/fallowInfo" />
 
+    <!-- Settings Button -->
     <ImageView
         android:layout_marginTop="30dp"
         android:id="@+id/settingsButton"
