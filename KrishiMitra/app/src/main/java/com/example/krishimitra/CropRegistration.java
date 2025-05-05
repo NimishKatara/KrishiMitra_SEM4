@@ -36,7 +36,7 @@ public class CropRegistration extends AppCompatActivity {
 
         // Data for spinners
         String[] soilOptions = {"Choose Soil", "Red", "Black", "Rock Soil", "Sandy Red", "Sandy", "Black Sandy", "Clay"};
-        String[] cropOptions = {"Choose Crop", "Wheat", "Rice", "Maize", "Cotton"};
+        String[] cropOptions = {"Choose Crop","Flowers","Potato","Sweetcorn","Tomato","Paddy","Banana","Beans","Anaar","Horsegram","Cabbage","Fowers"};
 
         // Create adapters using custom layout for white text
         ArrayAdapter<String> soilAdapter = new ArrayAdapter<>(this, R.layout.spinner_item, soilOptions);
