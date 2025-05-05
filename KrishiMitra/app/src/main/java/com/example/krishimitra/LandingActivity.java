@@ -21,6 +21,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class LandingActivity extends AppCompatActivity {
@@ -43,39 +44,32 @@ public class LandingActivity extends AppCompatActivity {
         cropRecyclerView = findViewById(R.id.cropRecyclerView);
         cropRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        cropAdapter = new CropAdapter(cropList);
+        cropAdapter = new CropAdapter(cropList, this);
         cropRecyclerView.setAdapter(cropAdapter);
 
-        // Add Crop button
         Button addCropButton = findViewById(R.id.addCrop);
         addCropButton.setOnClickListener(view -> {
             Intent addIntent = new Intent(LandingActivity.this, CropRegistration.class);
             startActivity(addIntent);
         });
 
-        // Settings button
         ImageView settingsButton = findViewById(R.id.settingsButton);
         settingsButton.setOnClickListener(view -> {
             Intent settingsIntent = new Intent(LandingActivity.this, Settings.class);
             startActivity(settingsIntent);
         });
 
-        // Handle crop passed from CropRegistration
+        // Get crop data from intent
         Intent intent = getIntent();
         String soilType = intent.getStringExtra("soilType");
         String cropType = intent.getStringExtra("cropType");
 
-        // Always load crops on activity start
-        if (user != null) {
-            loadCropsFromFirestore();
-        }
-
-// If user is returning from CropRegistration with new crop
+        // Save if data exists
         if (soilType != null && cropType != null && user != null) {
             saveCropToFirestore(new Crop(soilType, cropType));
         }
 
-        // Load all crops from Firestore for this user
+        // Always load crops on start
         if (user != null) {
             loadCropsFromFirestore();
         }
@@ -85,11 +79,9 @@ public class LandingActivity extends AppCompatActivity {
         if (user == null) return;
 
         String phone = user.getPhoneNumber();
-
         DocumentReference userDocRef = db.collection("users").document(phone);
 
-        // Ensure user document exists — even if it's empty
-        userDocRef.set(new HashMap<>())  // Creates empty doc
+        userDocRef.set(new HashMap<>()) // Create empty user doc if not exists
                 .addOnSuccessListener(unused -> {
                     userDocRef.collection("registeredCrops")
                             .add(new HashMap<String, Object>() {{
@@ -97,31 +89,22 @@ public class LandingActivity extends AppCompatActivity {
                                 put("soilType", crop.getSoilType());
                                 put("timestamp", FieldValue.serverTimestamp());
                             }})
-                            .addOnSuccessListener(documentReference -> Log.d("LandingActivity", "Crop saved"))
-                            .addOnFailureListener(e -> Log.e("LandingActivity", "Failed to save crop", e));
+                            .addOnSuccessListener(documentReference ->
+                                    Log.d("LandingActivity", "Crop saved"))
+                            .addOnFailureListener(e ->
+                                    Log.e("LandingActivity", "Failed to save crop", e));
                 })
-                .addOnFailureListener(e -> Log.e("LandingActivity", "Failed to create user doc", e));
+                .addOnFailureListener(e ->
+                        Log.e("LandingActivity", "Failed to create user doc", e));
     }
 
-
     private void loadCropsFromFirestore() {
-        Log.d("LandingActivity", "Starting to load crops from Firestore...");
-
         cropList.clear();
-        cropAdapter.notifyDataSetChanged(); // Clear existing list visually
+        cropAdapter.notifyDataSetChanged();
 
-        if (user == null) {
-            Log.e("LandingActivity", "Firebase user is null. Cannot load crops.");
-            return;
-        }
-
+        if (user == null) return;
         String phone = user.getPhoneNumber();
-        if (phone == null) {
-            Log.e("LandingActivity", "User phone number is null.");
-            return;
-        }
-
-        Log.d("LandingActivity", "Fetching crops for phone number: " + phone);
+        if (phone == null) return;
 
         db.collection("users")
                 .document(phone)
@@ -129,31 +112,22 @@ public class LandingActivity extends AppCompatActivity {
                 .orderBy("timestamp", Query.Direction.DESCENDING)
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
-                    Log.d("LandingActivity", "Successfully fetched " + queryDocumentSnapshots.size() + " documents");
-
-                    if (queryDocumentSnapshots.isEmpty()) {
-                        Log.d("LandingActivity", "No crops found for user.");
-                    }
-
                     for (DocumentSnapshot document : queryDocumentSnapshots) {
                         String cropType = document.getString("cropType");
                         String soilType = document.getString("soilType");
-
-                        Log.d("LandingActivity", "Fetched crop - CropType: " + cropType + ", SoilType: " + soilType);
+                        String docId = document.getId();
 
                         if (cropType != null && soilType != null) {
-                            cropList.add(new Crop(soilType, cropType));
-                        } else {
-                            Log.w("LandingActivity", "Invalid crop document (missing fields): " + document.getId());
+                            Crop crop = new Crop(soilType, cropType);
+                            crop.setDocumentId(docId); // ⚠️ Add the document ID
+                            crop.setFertilizerNutrients(Arrays.asList("Ammonium", "Sulphate", "Nitrate")); // ✅ Hardcoded nutrients
+                            cropList.add(crop);
                         }
+
                     }
 
                     cropAdapter.notifyDataSetChanged();
-                    Log.d("LandingActivity", "Crops displayed in RecyclerView.");
                 })
-                .addOnFailureListener(e -> {
-                    Log.e("LandingActivity", "Failed to fetch crops from Firestore", e);
-                });
+                .addOnFailureListener(e -> Log.e("LandingActivity", "Failed to load crops", e));
     }
-
 }

@@ -35,7 +35,7 @@ public class CropRegistration extends AppCompatActivity {
         cropSpinner = findViewById(R.id.cropInput);
 
         // Data for spinners
-        String[] soilOptions = {"Choose Soil", "Red", "Black", "Rock Soil", "Sandy Red", "Sandy", "Black Sandy", "Clay"};
+        String[] soilOptions = {"Choose Soil", "Red", "Black", "Rock Soil", "Sandy Red","Sandy", "Black Sandy", "Clay"};
         String[] cropOptions = {"Choose Crop","Flowers","Potato","Sweetcorn","Tomato","Paddy","Banana","Beans","Anaar","Horsegram","Cabbage","Fowers"};
 
         // Create adapters using custom layout for white text
