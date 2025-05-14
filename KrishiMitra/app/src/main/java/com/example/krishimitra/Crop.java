@@ -8,14 +8,13 @@ public class Crop {
     private String soilType;
     private String cropType;
     private List<String> fertilizerNutrients;
-
-    private String documentId;  // Added field to store Firestore document ID
+    private String documentId;
 
     @ServerTimestamp
-    private Date timestamp; // For sorting
+    private Date timestamp;
 
     public Crop() {
-        // Firestore requires empty constructor
+        // Required for Firestore deserialization
     }
 
     public Crop(String soilType, String cropType) {
@@ -44,11 +43,16 @@ public class Crop {
     public void setDocumentId(String documentId) {
         this.documentId = documentId;
     }
+
     public List<String> getFertilizerNutrients() {
         return fertilizerNutrients;
     }
+
     public void setFertilizerNutrients(List<String> fertilizerNutrients) {
         this.fertilizerNutrients = fertilizerNutrients;
     }
 
+    public Date getTimestamp() {
+        return timestamp;
+    }
 }

@@ -1,23 +1,20 @@
 package com.example.krishimitra;
-
 public class Fertilizer {
     private String name;
-    private String nutrient;
-    private String weight;
-    private int price;
-    private int imageResId;
+    private String soilType;
+    private String cropType;
+    private double dosagePerAcre;
 
-    public Fertilizer(String name, String nutrient, String weight, int price, int imageResId) {
+    public Fertilizer(String name, String soilType, String cropType, double dosagePerAcre) {
         this.name = name;
-        this.nutrient = nutrient;
-        this.weight = weight;
-        this.price = price;
-        this.imageResId = imageResId;
+        this.soilType = soilType;
+        this.cropType = cropType;
+        this.dosagePerAcre = dosagePerAcre;
     }
 
+    // getters
     public String getName() { return name; }
-    public String getNutrient() { return nutrient; }
-    public String getWeight() { return weight; }
-    public int getPrice() { return price; }
-    public int getImageResId() { return imageResId; }
+    public String getSoilType() { return soilType; }
+    public String getCropType() { return cropType; }
+    public double getDosagePerAcre() { return dosagePerAcre; }
 }

@@ -7,7 +7,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.Nullable;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,6 +24,8 @@ import com.google.firebase.firestore.Query;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class LandingActivity extends AppCompatActivity {
 
@@ -31,6 +34,25 @@ public class LandingActivity extends AppCompatActivity {
     private ArrayList<Crop> cropList = new ArrayList<>();
     private FirebaseFirestore db;
     private FirebaseUser user;
+
+    private final Map<String, Map<String, List<String>>> fertilizerMap = new HashMap<>();
+
+    private final ActivityResultLauncher<Intent> cropResultLauncher =
+            registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+                if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                    String soil = result.getData().getStringExtra("soilType");
+                    String crop = result.getData().getStringExtra("cropType");
+
+                    if (soil != null && crop != null) {
+                        Crop newCrop = new Crop(soil, crop);
+                        saveCropToFirestore(newCrop);
+                        cropList.add(0, newCrop);
+                        newCrop.setFertilizerNutrients(getFertilizerRecommendation(soil, crop));
+                        cropAdapter.notifyItemInserted(0);
+                        cropRecyclerView.scrollToPosition(0);
+                    }
+                }
+            });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +72,7 @@ public class LandingActivity extends AppCompatActivity {
         Button addCropButton = findViewById(R.id.addCrop);
         addCropButton.setOnClickListener(view -> {
             Intent addIntent = new Intent(LandingActivity.this, CropRegistration.class);
-            startActivity(addIntent);
+            cropResultLauncher.launch(addIntent);
         });
 
         ImageView settingsButton = findViewById(R.id.settingsButton);
@@ -59,43 +81,101 @@ public class LandingActivity extends AppCompatActivity {
             startActivity(settingsIntent);
         });
 
-        // Get crop data from intent
-        Intent intent = getIntent();
-        String soilType = intent.getStringExtra("soilType");
-        String cropType = intent.getStringExtra("cropType");
+        initializeFertilizerMap();
 
-        // Save if data exists
-        if (soilType != null && cropType != null && user != null) {
-            saveCropToFirestore(new Crop(soilType, cropType));
-        }
-
-        // Always load crops on start
         if (user != null) {
             loadCropsFromFirestore();
         }
+
+        cropAdapter.setOnItemClickListener(crop -> {
+            Intent intent = new Intent(LandingActivity.this, FertilizerActivity.class);
+            intent.putExtra("soilType", crop.getSoilType());
+            intent.putExtra("cropType", crop.getCropType());
+            startActivity(intent);
+        });
+    }
+
+    private void initializeFertilizerMap() {
+        fertilizerMap.put("Red", new HashMap<>() {{
+            put("Paddy", Arrays.asList("Nitrogen - 50 kg/acre", "Zinc sulphate - 25 kg/acre"));
+            put("Tomato", Arrays.asList("NPK 19:19:19 - 30 kg/acre", "Calcium Nitrate - 15 kg/acre"));
+            put("Flowers", Arrays.asList("Compost - 50 kg/acre", "Micronutrient mix - 10 kg/acre"));
+            put("Cabbage", Arrays.asList("Urea - 30 kg/acre", "Compost - 60 kg/acre"));
+            put("Potato", Arrays.asList("NPK 12:32:16 - 40 kg/acre", "Urea - 25 kg/acre"));
+        }});
+
+        fertilizerMap.put("Black", new HashMap<>() {{
+            put("Potato", Arrays.asList("Ammonia - 60 kg/acre", "NPK 12:32:16 - 50 kg/acre"));
+            put("Paddy", Arrays.asList("MOP - 45 kg/acre", "Super phosphate - 35 kg/acre"));
+            put("Sweetcorn", Arrays.asList("DAP - 40 kg/acre", "Potash - 25 kg/acre"));
+        }});
+
+        fertilizerMap.put("Sandy", new HashMap<>() {{
+            put("Tomato", Arrays.asList("NPK 20:20:20 - 40 kg/acre", "Vermicompost - 80 kg/acre"));
+            put("Banana", Arrays.asList("NPK 17:17:17 - 50 kg/acre", "Organic compost - 100 kg/acre"));
+            put("Anaar", Arrays.asList("Bone meal - 40 kg/acre", "Compost - 80 kg/acre"));
+        }});
+
+        fertilizerMap.put("Clay", new HashMap<>() {{
+            put("Beans", Arrays.asList("FYM - 100 kg/acre", "NPK 14:35:14 - 40 kg/acre"));
+            put("Sweetcorn", Arrays.asList("Potassium - 45 kg/acre", "MOP - 20 kg/acre"));
+            put("Cabbage", Arrays.asList("Compost - 60 kg/acre", "Urea - 30 kg/acre"));
+            put("Flowers", Arrays.asList("Compost - 60 kg/acre", "Bone meal - 15 kg/acre"));
+        }});
+
+        fertilizerMap.put("Rock Soil", new HashMap<>() {{
+            put("Horsegram", Arrays.asList("Minimal fertilizer needed", "Add organic manure"));
+            put("Flowers", Arrays.asList("Compost - 40 kg/acre", "Bone meal - 20 kg/acre"));
+        }});
+
+        fertilizerMap.put("Sandy Red", new HashMap<>() {{
+            put("Cabbage", Arrays.asList("Compost - 60 kg/acre", "Urea - 30 kg/acre"));
+            put("Tomato", Arrays.asList("NPK 19:19:19 - 30 kg/acre", "Micronutrients - 10 kg/acre"));
+        }});
+
+        fertilizerMap.put("Black Sandy", new HashMap<>() {{
+            put("Anaar", Arrays.asList("Bone meal - 40 kg/acre", "NPK 18:18:18 - 25 kg/acre"));
+            put("Banana", Arrays.asList("Compost - 80 kg/acre", "NPK 20:10:10 - 35 kg/acre"));
+        }});
     }
 
     private void saveCropToFirestore(Crop crop) {
         if (user == null) return;
 
         String phone = user.getPhoneNumber();
+        if (phone == null) return;
+
         DocumentReference userDocRef = db.collection("users").document(phone);
 
-        userDocRef.set(new HashMap<>()) // Create empty user doc if not exists
-                .addOnSuccessListener(unused -> {
-                    userDocRef.collection("registeredCrops")
-                            .add(new HashMap<String, Object>() {{
+        userDocRef.set(new HashMap<>());
+
+        userDocRef.collection("registeredCrops")
+                .add(new HashMap<>() {{
+                    put("cropType", crop.getCropType());
+                    put("soilType", crop.getSoilType());
+                    put("timestamp", FieldValue.serverTimestamp());
+                }})
+                .addOnSuccessListener(documentReference -> Log.d("LandingActivity", "Crop saved"))
+                .addOnFailureListener(e -> Log.e("LandingActivity", "Failed to save crop", e));
+
+        List<String> fertilizerList = getFertilizerRecommendation(crop.getSoilType(), crop.getCropType());
+        if (fertilizerList != null) {
+            for (String fert : fertilizerList) {
+                String[] parts = fert.split(" - ");
+                if (parts.length == 2) {
+                    String fertName = parts[0];
+                    String fertDosage = parts[1];
+
+                    userDocRef.collection("fertilizers")
+                            .add(new HashMap<>() {{
                                 put("cropType", crop.getCropType());
                                 put("soilType", crop.getSoilType());
-                                put("timestamp", FieldValue.serverTimestamp());
-                            }})
-                            .addOnSuccessListener(documentReference ->
-                                    Log.d("LandingActivity", "Crop saved"))
-                            .addOnFailureListener(e ->
-                                    Log.e("LandingActivity", "Failed to save crop", e));
-                })
-                .addOnFailureListener(e ->
-                        Log.e("LandingActivity", "Failed to create user doc", e));
+                                put("name", fertName);
+                                put("dosagePerAcre", fertDosage);
+                            }});
+                }
+            }
+        }
     }
 
     private void loadCropsFromFirestore() {
@@ -119,15 +199,22 @@ public class LandingActivity extends AppCompatActivity {
 
                         if (cropType != null && soilType != null) {
                             Crop crop = new Crop(soilType, cropType);
-                            crop.setDocumentId(docId); // ⚠️ Add the document ID
-                            crop.setFertilizerNutrients(Arrays.asList("Ammonium", "Sulphate", "Nitrate")); // ✅ Hardcoded nutrients
+                            crop.setDocumentId(docId);
+                            crop.setFertilizerNutrients(getFertilizerRecommendation(soilType, cropType));
                             cropList.add(crop);
                         }
-
                     }
-
                     cropAdapter.notifyDataSetChanged();
                 })
                 .addOnFailureListener(e -> Log.e("LandingActivity", "Failed to load crops", e));
+    }
+
+    private List<String> getFertilizerRecommendation(String soilType, String cropType) {
+        Map<String, List<String>> cropMap = fertilizerMap.get(soilType);
+        if (cropMap != null) {
+            List<String> result = cropMap.get(cropType);
+            if (result != null) return result;
+        }
+        return Arrays.asList("Urea - 50 kg/acre", "Nitrogen 10:26:26 - 40 kg/acre");
     }
 }

@@ -34,11 +34,9 @@ public class CropRegistration extends AppCompatActivity {
         soilSpinner = findViewById(R.id.soilInput);
         cropSpinner = findViewById(R.id.cropInput);
 
-        // Data for spinners
-        String[] soilOptions = {"Choose Soil", "Red", "Black", "Rock Soil", "Sandy Red","Sandy", "Black Sandy", "Clay"};
-        String[] cropOptions = {"Choose Crop","Flowers","Potato","Sweetcorn","Tomato","Paddy","Banana","Beans","Anaar","Horsegram","Cabbage","Fowers"};
+        String[] soilOptions = {"Choose Soil", "Red", "Black", "Rock Soil", "Sandy Red", "Sandy", "Black Sandy", "Clay"};
+        String[] cropOptions = {"Choose Crop", "Flowers", "Potato", "Sweetcorn", "Tomato", "Paddy", "Banana", "Beans", "Anaar", "Horsegram", "Cabbage"};
 
-        // Create adapters using custom layout for white text
         ArrayAdapter<String> soilAdapter = new ArrayAdapter<>(this, R.layout.spinner_item, soilOptions);
         soilAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         soilSpinner.setAdapter(soilAdapter);
@@ -47,7 +45,6 @@ public class CropRegistration extends AppCompatActivity {
         cropAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         cropSpinner.setAdapter(cropAdapter);
 
-        // Submit Button logic
         Button submitBtn = findViewById(R.id.submitBtn);
         submitBtn.setOnClickListener(view -> {
             String soil = soilSpinner.getSelectedItem().toString();
@@ -58,14 +55,13 @@ public class CropRegistration extends AppCompatActivity {
                 return;
             }
 
-            Intent intent = new Intent(CropRegistration.this, LandingActivity.class);
-            intent.putExtra("soilType", soil);
-            intent.putExtra("cropType", crop);
-            startActivity(intent);
+            Intent resultIntent = new Intent();
+            resultIntent.putExtra("soilType", soil);
+            resultIntent.putExtra("cropType", crop);
+            setResult(RESULT_OK, resultIntent);
             finish();
         });
 
-        // Settings Button
         ImageView settingsButton = findViewById(R.id.settingsButton);
         settingsButton.setOnClickListener(view -> {
             Intent intent = new Intent(CropRegistration.this, Settings.class);

@@ -1,12 +1,11 @@
 package com.example.krishimitra;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.List;
 
 public class FertilizerAdapter extends RecyclerView.Adapter<FertilizerAdapter.FertilizerViewHolder> {
@@ -28,10 +27,12 @@ public class FertilizerAdapter extends RecyclerView.Adapter<FertilizerAdapter.Fe
     @Override
     public void onBindViewHolder(@NonNull FertilizerViewHolder holder, int position) {
         Fertilizer fertilizer = fertilizerList.get(position);
+
+        double dosagePerSqM = fertilizer.getDosagePerAcre() / 4046.86;
+
         holder.fertilizerName.setText(fertilizer.getName());
-        holder.fertilizerNutrient.setText(fertilizer.getNutrient());
-        holder.fertilizerWeightPrice.setText(fertilizer.getWeight() + " - Rs " + fertilizer.getPrice());
-        holder.fertilizerImage.setImageResource(fertilizer.getImageResId());
+        holder.fertilizerNutrient.setText("For " + fertilizer.getCropType() + " on " + fertilizer.getSoilType());
+        holder.fertilizerWeightPrice.setText(String.format("Dosage: %.4f g/m²", dosagePerSqM));
     }
 
     @Override
@@ -40,12 +41,10 @@ public class FertilizerAdapter extends RecyclerView.Adapter<FertilizerAdapter.Fe
     }
 
     static class FertilizerViewHolder extends RecyclerView.ViewHolder {
-        ImageView fertilizerImage;
         TextView fertilizerName, fertilizerNutrient, fertilizerWeightPrice;
 
         public FertilizerViewHolder(@NonNull View itemView) {
             super(itemView);
-            fertilizerImage = itemView.findViewById(R.id.fertilizerImage);
             fertilizerName = itemView.findViewById(R.id.fertilizerName);
             fertilizerNutrient = itemView.findViewById(R.id.fertilizerNutrient);
             fertilizerWeightPrice = itemView.findViewById(R.id.fertilizerWeightPrice);
