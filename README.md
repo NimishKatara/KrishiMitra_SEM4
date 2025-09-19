@@ -1,0 +1,1 @@
+KrishiMitra is a technology-driven agricultural platform aimed at supporting farmers through data, AI, and digital services: it offers features like crop disease detection, fertilizer and crop recommendations, weather forecasting, and information about government subsidies/schemes.
